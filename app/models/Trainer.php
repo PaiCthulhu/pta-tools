@@ -2,27 +2,30 @@
 class Trainer extends Model {
     const statNames = ['HP','ATK','DEF','S.ATK', 'S.DEF','SPD'];
     protected $name, $playerName, $age, $gender, $height, $weight, $level,
-        $baseStat, $startingPoints, $stats, $combatStages;
+        $baseStat, $baseMax, $startingPoints, $stats, $combatStages, $errors,
+        $trainer_id, $secret_id;
 
-    function __construct(){
+    function __construct($id = null){
         $this->name = 'Unknown';
         $this->playerName = 'NPC';
-        $this->age = 0;
-        $this->gender = 0;
-        $this->height = 0;
-        $this->weight = 0;
-        $this->level = 0;
+        $this->trainer_id = $this->secret_id = $this->age = $this->gender =
+                            $this->height = $this->weight = $this->level = 0;
         $this->baseStat = 6;
+        $this->baseMax = 14;
         $this->startingPoints = 30;
         foreach (self::statNames as $stat){
             $this->stats[$stat] = $this->baseStat;
             $this->combatStages[$stat] = 0;
         }
+        $this->errors = [];
         parent::__construct();
+        if(!empty($id))
+            $this->load($id);
     }
 
     function load($id){
         $trainer = parent::get($id);
+        $trainer->stats = json_decode($trainer->stats);
         $this->name = $trainer->name;
         $this->playerName = $trainer->player_name;
         $this->age = $trainer->age;
@@ -30,10 +33,15 @@ class Trainer extends Model {
         $this->height = $trainer->height;
         $this->weight = $trainer->weight;
         $this->level = $trainer->level;
-        foreach (self::statNames as $stat){
-            $this->stats[$stat] = $this->baseStat;
-            $this->combatStages[$stat] = 0;
+        $this->secret_id = $trainer->trainer_id;
+        $this->trainer_id = $trainer->trainer_code;
+        foreach (self::statNames as $i=>$stat){
+            $this->setStat($stat, $trainer->stats[$i]);
         }
+    }
+
+    function trainerId(){
+        return $this->trainer_id;
     }
 
     function level(){
@@ -56,7 +64,44 @@ class Trainer extends Model {
         return $this->stats[strtoupper($statName)];
     }
 
-    function setStat(){
+    function setStat($statName, $value){
+        $return = false;
+        if(!in_array($statName, self::statNames))
+            $this->errors[] = "Invalid Stat Name: \"{$statName}\"";
+        else if($value < 6)
+            $this->errors[] = "Invalid Stat Value ({$statName}): Trainer stats can't be less than 6";
+        else if($this->statsTotal()+($value-$this->stats[$statName]) > $this->statsMaxTotal())
+            $this->errors[] = "Invalid Stat Value ({$statName}): Total stats would break max stats (".($this->statsTotal()+$value)." > {$this->statsMaxTotal()} - ".json_encode($this->stats).")";
+        else if($value > ($this->level()+$this->baseMax))
+            $this->errors[] = "Invalid Stat Value ({$statName}): Stat value is over what is avaiable for you level";
+        else{
+            $return = true;
+            $this->stats[$statName] = $value;
+        }
+
+        return $return;
+    }
+
+    /**
+     * Sum of all trainer stats points
+     * @return int
+     */
+    function statsTotal(){
+        $total =    $this->stats[self::statNames[0]] +
+                    $this->stats[self::statNames[1]] +
+                    $this->stats[self::statNames[2]] +
+                    $this->stats[self::statNames[3]] +
+                    $this->stats[self::statNames[4]] +
+                    $this->stats[self::statNames[5]];
+        return $total;
+    }
+
+    function statsMaxTotal(){
+        $base = $this->baseStat * 6 + $this->startingPoints;
+        if($this->level() > 10)
+            return $base + 10 + ($this->level()-10)/2;
+        else
+            return $base+$this->level();
 
     }
 

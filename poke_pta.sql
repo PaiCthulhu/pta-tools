@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 01-Mar-2018 às 16:48
--- Versão do servidor: 10.1.22-MariaDB
--- PHP Version: 7.1.4
+-- Generation Time: 01-Mar-2018 às 22:15
+-- Versão do servidor: 10.1.28-MariaDB
+-- PHP Version: 7.1.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,99 @@ SET time_zone = "+00:00";
 --
 -- Database: `poke_pta`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `feature_cat`
+--
+
+CREATE TABLE `feature_cat` (
+  `feature_cat_id` int(11) NOT NULL,
+  `name` varchar(60) COLLATE utf8_bin NOT NULL,
+  `type` enum('Common','Base','Advanced') COLLATE utf8_bin NOT NULL DEFAULT 'Common',
+  `parent` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Extraindo dados da tabela `feature_cat`
+--
+
+INSERT INTO `feature_cat` (`feature_cat_id`, `name`, `type`, `parent`) VALUES
+(1, 'Class', 'Common', 0),
+(2, 'Trainer', 'Common', 1),
+(3, 'Ace Trainer', 'Base', 2),
+(4, 'Chaser', 'Advanced', 3),
+(5, 'Enduring Soul', 'Advanced', 3),
+(6, 'Stat Ace', 'Advanced', 3),
+(7, 'Strategist', 'Advanced', 3),
+(8, 'Tag Battler', 'Advanced', 3),
+(9, 'Type Ace', 'Advanced', 3),
+(10, 'Underdog', 'Advanced', 3),
+(11, 'Breeder', 'Base', 2),
+(12, 'Botanist', 'Advanced', 11),
+(13, 'Chef', 'Advanced', 11),
+(14, 'Evolver', 'Advanced', 11),
+(15, 'Groomer', 'Advanced', 11),
+(16, 'Hatcher', 'Advanced', 11),
+(17, 'Medic', 'Advanced', 11),
+(18, 'Move Tutor', 'Advanced', 11),
+(19, 'Capture Specialist', 'Base', 2),
+(20, 'Artificer', 'Advanced', 19),
+(21, 'Collector', 'Advanced', 19),
+(22, 'Engineer', 'Advanced', 19),
+(23, 'Juggler', 'Advanced', 19),
+(24, 'Pokeball Designer', 'Advanced', 19),
+(25, 'Snagger', 'Advanced', 19),
+(26, 'Trapper', 'Advanced', 19),
+(27, 'Coordinator', 'Base', 2),
+(28, 'Beauty Modeler', 'Advanced', 27),
+(29, 'Choreographer', 'Advanced', 27),
+(30, 'Cool Trainer', 'Advanced', 27),
+(31, 'Cute Idol', 'Advanced', 27),
+(32, 'Fashion Designer', 'Advanced', 27),
+(33, 'Smart Teacher', 'Advanced', 27),
+(34, 'Tough Guy', 'Advanced', 27),
+(35, 'Martial Artist', 'Base', 2),
+(36, 'Athlete', 'Advanced', 35),
+(37, 'Aura User', 'Advanced', 35),
+(38, 'Black Belt', 'Advanced', 35),
+(39, 'Dirty Fighter', 'Advanced', 35),
+(40, 'Ninja', 'Advanced', 35),
+(41, 'Weapons Master', 'Advanced', 35),
+(42, 'Yogi', 'Advanced', 35),
+(44, 'Mystic', 'Base', 2),
+(45, 'Bard', 'Advanced', 43),
+(46, 'Bodysnatcher', 'Advanced', 43),
+(47, 'Conduit', 'Advanced', 43),
+(48, 'Godspeaker', 'Advanced', 43),
+(49, 'Guardian', 'Advanced', 43),
+(50, 'Rune Master', 'Advanced', 43),
+(51, 'Shaman', 'Advanced', 43),
+(52, 'Psychic', 'Base', 2),
+(53, 'Air Adept', 'Advanced', 51),
+(54, 'Clairsentient', 'Advanced', 51),
+(55, 'Earth Shaker', 'Advanced', 51),
+(56, 'Empath', 'Advanced', 51),
+(57, 'Fire Breather', 'Advanced', 51),
+(58, 'Hex Maniac', 'Advanced', 51),
+(59, 'Rain Waker', 'Advanced', 51),
+(60, 'Ranger', 'Base', 2),
+(61, 'Coach', 'Advanced', 59),
+(62, 'Commander', 'Advanced', 59),
+(63, 'Detective', 'Advanced', 59),
+(64, 'Rider', 'Advanced', 59),
+(65, 'Signer', 'Advanced', 59),
+(66, 'Special Operations', 'Advanced', 59),
+(67, 'Survivalist', 'Advanced', 59),
+(68, 'Researcher', 'Base', 2),
+(69, 'Cryptozoologist', 'Advanced', 68),
+(70, 'Dream Doctor', 'Advanced', 68),
+(71, 'Petrologist', 'Advanced', 68),
+(72, 'Photographer', 'Advanced', 68),
+(73, 'Professor', 'Advanced', 68),
+(74, 'Scientist', 'Advanced', 68),
+(75, 'Watcher', 'Advanced', 68);
 
 -- --------------------------------------------------------
 
@@ -89,8 +182,8 @@ CREATE TABLE `trainer` (
   `level` int(11) NOT NULL DEFAULT '0',
   `age` int(11) NOT NULL DEFAULT '0',
   `gender` enum('n','m','f') COLLATE utf8_bin NOT NULL DEFAULT 'n',
-  `height` decimal(10,0) NOT NULL DEFAULT '0',
-  `weight` decimal(10,0) NOT NULL DEFAULT '0',
+  `height` decimal(4,2) NOT NULL DEFAULT '0.00',
+  `weight` float NOT NULL DEFAULT '0',
   `stats` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '[6,6,6,6,6,6]',
   `date_started` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -100,7 +193,7 @@ CREATE TABLE `trainer` (
 --
 
 INSERT INTO `trainer` (`trainer_id`, `national`, `trainer_code`, `name`, `player_name`, `level`, `age`, `gender`, `height`, `weight`, `stats`, `date_started`) VALUES
-(1, 9, 21240, 'Willheim von Hyazinthe', 'William J. Venancio', 12, 23, 'm', '2', '130', '[12,10,13,17,15,10]', '1932-02-22 09:58:36');
+(1, 9, 21240, 'Willheim von Hyazinthe', 'William J. Venancio', 12, 23, 'm', '1.82', 130, '[12,10,13,17,15,10]', '1932-02-22 09:58:36');
 
 -- --------------------------------------------------------
 
@@ -145,6 +238,12 @@ INSERT INTO `type` (`type_id`, `name`, `color`, `effect`) VALUES
 --
 
 --
+-- Indexes for table `feature_cat`
+--
+ALTER TABLE `feature_cat`
+  ADD PRIMARY KEY (`feature_cat_id`);
+
+--
 -- Indexes for table `region`
 --
 ALTER TABLE `region`
@@ -169,20 +268,29 @@ ALTER TABLE `type`
 --
 
 --
+-- AUTO_INCREMENT for table `feature_cat`
+--
+ALTER TABLE `feature_cat`
+  MODIFY `feature_cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+
+--
 -- AUTO_INCREMENT for table `region`
 --
 ALTER TABLE `region`
   MODIFY `region_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
 --
 -- AUTO_INCREMENT for table `trainer`
 --
 ALTER TABLE `trainer`
   MODIFY `trainer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `type`
 --
 ALTER TABLE `type`
-  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;COMMIT;
+  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
