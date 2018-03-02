@@ -3,12 +3,13 @@ class Trainer extends Model {
     const statNames = ['HP','ATK','DEF','S.ATK', 'S.DEF','SPD'];
     protected $name, $playerName, $age, $gender, $height, $weight, $level,
         $baseStat, $baseMax, $startingPoints, $stats, $combatStages, $errors,
-        $trainer_id, $secret_id;
+        $trainer_id, $secret_id, $region_id;
+    public $region;
 
     function __construct($id = null){
         $this->name = 'Unknown';
         $this->playerName = 'NPC';
-        $this->trainer_id = $this->secret_id = $this->age = $this->gender =
+        $this->trainer_id = $this->secret_id = $this->region_id = $this->age = $this->gender =
                             $this->height = $this->weight = $this->level = 0;
         $this->baseStat = 6;
         $this->baseMax = 14;
@@ -35,6 +36,9 @@ class Trainer extends Model {
         $this->level = $trainer->level;
         $this->secret_id = $trainer->trainer_id;
         $this->trainer_id = $trainer->trainer_code;
+        $this->region_id = $trainer->region_id;
+        $reg = new Region();
+        $this->region = $reg->load($trainer->region_id);
         foreach (self::statNames as $i=>$stat){
             $this->setStat($stat, $trainer->stats[$i]);
         }
@@ -59,6 +63,7 @@ class Trainer extends Model {
     function age(){  return $this->age; }
     function height(){  return $this->height; }
     function weight(){  return $this->weight; }
+    function regionId(){ return $this->region_id; }
 
     function stat($statName){
         return $this->stats[strtoupper($statName)];

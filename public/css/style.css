@@ -1,1 +1,9 @@
 @charset "UTF-8";
+
+.reg-tag{
+    border-width: 1px;
+    border-style: solid;
+    padding: 0 4px 2px 4px;
+    border-radius: 8px;
+    font-weight: bold;
+}

@@ -85,6 +85,12 @@ class DB {
         return $this->fetch($query, $mode);
     }
 
+    /**
+     * @param $table
+     * @param $id
+     * @param int $mode
+     * @return bool|array|stdClass
+     */
     function selectSingle($table, $id, $mode = PDO::FETCH_OBJ){
         $k = $this->handle->query("SHOW KEYS FROM {$table} WHERE Key_name = 'PRIMARY'");
         if($k === false){

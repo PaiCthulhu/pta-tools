@@ -19,4 +19,23 @@ class Model{
     function find($params){
         return $this->db->selectSingleByFields($this->_table, $params);
     }
+
+    function load($id){
+        $l = $this->get($id);
+        return $this->cast($l, $this);
+    }
+
+    /**
+     * @param stdClass $source
+     * @param string|object $dest
+     * @return object
+     */
+    function cast($source, $dest){
+        if(is_string($dest))
+            $dest = new $dest();
+        foreach (get_object_vars($source) as $prop=>$val){
+            $dest->$prop = $val;
+        }
+        return $dest;
+    }
 }

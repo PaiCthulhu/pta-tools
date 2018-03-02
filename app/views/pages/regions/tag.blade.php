@@ -1,0 +1,1 @@
+<span class="reg-tag" title="{{$region->name}}" style="background-color: #{{$region->color_main}}; color: #{{$region->color_sub}};">{{$region->code}}</span>

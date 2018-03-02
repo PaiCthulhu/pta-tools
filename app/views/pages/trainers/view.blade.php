@@ -26,7 +26,9 @@
                             <th>Height</th>
                             <td>{{$trainer->height()}}m</td>
                             <th>Weight</th>
-                            <td>{{$trainer->weight()}}kg</td>
+                            <td colspan="2">{{$trainer->weight()}}kg</td>
+                            <th>Regionality</th>
+                            <td>{!! Regions::tag($trainer->regionId()) !!} {{$trainer->region->name}}</td>
                         </tr>
                     </table>
                     <table>
