@@ -1,0 +1,1 @@
+<b>L</b>{{$pokemon->getLevel()}} <b>XP: </b>{{$pokemon->currentXp()}}/{{$pokemon->xpNext()}}

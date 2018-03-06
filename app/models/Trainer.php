@@ -115,6 +115,8 @@ class Trainer extends Model {
     }
 
     function statMod($statName){
+        if($statName == self::statNames[0])
+            return false;
         $mod = $this->stats[strtoupper($statName)]-10;
         if($mod > 0)
             $mod /= 2;

@@ -9,6 +9,9 @@
                         <a href="{{PATH}}/types/tablematch">Type Match Table</a>
                     </li>
                     <li>
+                        <a href="{{PATH}}/pokemons/xpchart">Pokémon Experience Chart</a>
+                    </li>
+                    <li>
                         <a href="{{PATH}}/trainers/add">New Trainer</a>
                     </li>
                 </ul>

@@ -7,3 +7,10 @@
     border-radius: 8px;
     font-weight: bold;
 }
+
+.xp-table{
+    width: 100%;
+    text-align: center;
+}
+.xp-table th, .xp-table td{ border: 1px solid black;}
+.xp-table th{ background-color: #eeeeee;}

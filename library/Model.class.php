@@ -38,4 +38,12 @@ class Model{
         }
         return $dest;
     }
+
+    /**
+     * @param float $number
+     * @return string
+     */
+    static function numberFormat($number, $decimals = 0){
+        return number_format($number, $decimals, ',', '.');
+    }
 }
