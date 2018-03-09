@@ -7,6 +7,11 @@ class Pokemons extends Controller{
         parent::render('pages.pokemons.xpchart',['pokemon'=>$poke]);
     }
 
+    function sheet(){
+        $poke = new Pokemon();
+        parent::render('pages.sheets.pokemon',['pokemon'=>$poke]);
+    }
+
     function index(){
         $poke = new Pokemon();
         $poke->setLevel(46);
