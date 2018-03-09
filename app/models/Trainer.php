@@ -1,6 +1,7 @@
 <?php
 class Trainer extends Model {
-    const statNames = ['HP','ATK','DEF','S.ATK', 'S.DEF','SPD'];
+    const statNames = ['HP','ATK','DEF','S.ATK', 'S.DEF','SPD'],
+            statsDisplayNames = ['HP'=>'HP','ATK'=>'ATK','DEF'=>'DEF','SATK'=>'SP.ATK','SDEF'=>'SP.DEF','SPD'=>'SPD'];
     protected $name, $playerName, $age, $gender, $height, $weight, $level,
         $baseStat, $baseMax, $startingPoints, $stats, $combatStages, $errors,
         $trainer_id, $secret_id, $region_id;
@@ -135,8 +136,10 @@ class Trainer extends Model {
     function evasion($stat){
         if(!in_array(strtoupper($stat),[self::statNames[2],self::statNames[4],self::statNames[5]]))
             return -1;
-        $spl = (strtoupper($stat) == self::statNames[5])? 10:5;
-        return floor($this->stat($stat) / $spl);
+        if($this->statMod($stat) > 0)
+            return $this->statMod($stat);
+        else
+            return 0;
     }
 
     function spdEvasion(){ return $this->plusSign($this->evasion(self::statNames[5]));}
@@ -145,6 +148,11 @@ class Trainer extends Model {
 
     function maxStats(){
         return $this->baseStat*6+$this->startingPoints+$this->level;
+    }
+
+    function getAllTrainerSkills(){
+        $skills = new Skill();
+        return $skills->all();
     }
 
     function plusSign($val){

@@ -55,11 +55,11 @@
                         <th> &nbsp;BASE&nbsp; </th>
                         <th> &nbsp;ADDED&nbsp; </th>
                         <th> &nbsp;TOTAL&nbsp; </th>
-                        <th>STAGES</th>
+                        <th>COMBAT</th>
                     </tr>
                     </thead>
                     <tbody>
-                        <tr><th>HP</th><td></td><td></td><td></td><td></td></tr>
+                        <tr><th>HP</th><td></td><td></td><td></td><th>STAGES</th></tr>
                         <tr><th>ATK</th><td></td><td></td><td></td><td></td></tr>
                         <tr><th>DEF</th><td></td><td></td><td></td><td></td></tr>
                         <tr><th>&nbsp;SP.ATK&nbsp;</th><td></td><td></td><td></td><td></td></tr>
@@ -166,11 +166,67 @@
                         <div class="label">W.Class: </div>
                         <div class="field col"></div>
                     </div>
+                    <div class="row">
+                        <div class="label">Vitamins: </div>
+                        <div class="field col"></div>
+                    </div>
+                    <div class="row">
+                        <div class="field col">&nbsp;</div>
+                    </div>
                 </div>
             </div>
         </div>
         <br/>
-        <div class="row" id="moves"></div>
+        <div class="row" id="moves">
+            <div class="container row" style="padding-right: 0;">
+                <p><b>Natural Moves</b>(Level / Egg)</p>
+                @include('pages.sheets.includes.movetable')
+            </div>
+            <div class="container row" style="padding-right: 0;">
+                <p><br/><b>Techinical Moves</b>(TM/HM / Tutor)</p>
+                @include('pages.sheets.includes.movetable')
+            </div>
+        </div>
+        <br/>
+        <div class="row" id="notes">
+            <div class="col container">
+                <div class="row">
+                    <div class="label">Notes: </div>
+                    <div class="field col"></div>
+                </div>
+                <div class="row">
+                    <div class="field col">&nbsp;</div>
+                </div>
+                <div class="row">
+                    <div class="field col">&nbsp;</div>
+                </div>
+                <div class="row">
+                    <div class="field col">&nbsp;</div>
+                </div>
+                <div class="row">
+                    <div class="field col">&nbsp;</div>
+                </div>
+                <div class="row">
+                    <div class="field col">&nbsp;</div>
+                </div>
+            </div>
+            <div class="col-3" style="padding-right: 0;">
+                <table class="stats">
+                    <thead>
+                    <tr>
+                        <th colspan="2">Contest</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr><th>Cool</th><td>&nbsp;</td></tr>
+                    <tr><th>Tough</th><td>&nbsp;</td></tr>
+                    <tr><th>Beauty</th><td>&nbsp;</td></tr>
+                    <tr><th>Smart</th><td>&nbsp;</td></tr>
+                    <tr><th>Cute</th><td>&nbsp;</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 @stop

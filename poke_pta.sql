@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 06-Mar-2018 às 12:48
--- Versão do servidor: 10.1.22-MariaDB
--- PHP Version: 7.1.4
+-- Generation Time: 09-Mar-2018 às 19:19
+-- Versão do servidor: 10.1.28-MariaDB
+-- PHP Version: 7.1.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -653,7 +653,7 @@ CREATE TABLE `trainer` (
 --
 
 INSERT INTO `trainer` (`trainer_id`, `region_id`, `trainer_code`, `name`, `player_name`, `level`, `age`, `gender`, `height`, `weight`, `stats`, `date_started`) VALUES
-(1, 9, 21240, 'Willheim von Hyazinthe', 'William J. Venancio', 12, 23, 'm', '1.82', 130, '[12,10,13,17,15,10]', '1932-02-22 09:58:36');
+(1, 9, 21240, 'Willheim von Hyazinthe', 'William J. Venancio', 12, 23, 'm', '1.82', 130, '[12,12,13,14,14,12]', '1932-02-22 09:58:36');
 
 -- --------------------------------------------------------
 
@@ -845,76 +845,91 @@ ALTER TABLE `type`
 --
 ALTER TABLE `color`
   MODIFY `color_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `contest_type`
 --
 ALTER TABLE `contest_type`
   MODIFY `contest_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `egg_group`
 --
 ALTER TABLE `egg_group`
   MODIFY `egg_group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
 --
 -- AUTO_INCREMENT for table `feature`
 --
 ALTER TABLE `feature`
   MODIFY `feature_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `feature_cat`
 --
 ALTER TABLE `feature_cat`
   MODIFY `feature_cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+
 --
 -- AUTO_INCREMENT for table `habitat`
 --
 ALTER TABLE `habitat`
   MODIFY `habitat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
 --
 -- AUTO_INCREMENT for table `move`
 --
 ALTER TABLE `move`
   MODIFY `move_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `nature`
 --
 ALTER TABLE `nature`
   MODIFY `nature_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
 --
 -- AUTO_INCREMENT for table `pokemon_skill`
 --
 ALTER TABLE `pokemon_skill`
   MODIFY `pokemon_skill_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+
 --
 -- AUTO_INCREMENT for table `region`
 --
 ALTER TABLE `region`
   MODIFY `region_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
 --
 -- AUTO_INCREMENT for table `shape`
 --
 ALTER TABLE `shape`
   MODIFY `shape_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
 --
 -- AUTO_INCREMENT for table `species`
 --
 ALTER TABLE `species`
   MODIFY `species_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `trainer`
 --
 ALTER TABLE `trainer`
   MODIFY `trainer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `trainer_skill`
 --
 ALTER TABLE `trainer_skill`
   MODIFY `trainer_skill_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
 --
 -- AUTO_INCREMENT for table `type`
 --
 ALTER TABLE `type`
-  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;COMMIT;
+  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

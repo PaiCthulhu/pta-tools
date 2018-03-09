@@ -46,4 +46,11 @@ class Pokemon extends Model{
         return $xp;
     }
 
+    function evasion($stat){
+        if(!in_array(strtoupper($stat),[self::statNames[2],self::statNames[4],self::statNames[5]]))
+            return -1;
+        $spl = (strtoupper($stat) == self::statNames[5])? 10:5;
+        return floor($this->stat($stat) / $spl);
+    }
+
 }

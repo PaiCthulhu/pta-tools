@@ -60,6 +60,10 @@ img.display{
 #sheet .label:first-child, #sheet .row-tables [class^=col]:first-child{padding-left: 0;}
 #sheet .label:last-child, #sheet .row-tables [class^=col]:last-child{padding-right: 0;}
 
+#sheet .container.row{
+    width: calc(100% + 15px);
+}
+
 #sheet table.stats{
     width: 100%;
 }
